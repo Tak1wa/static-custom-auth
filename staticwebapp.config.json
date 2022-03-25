@@ -6,13 +6,22 @@
             "openIdIssuer": "https://login.microsoftonline.com/9b9e2fc6-dc1a-4d7f-97ff-e86600ac5b48/v2.0",
             "clientIdSettingName": "AZURE_CLIENT_ID",
             "clientSecretSettingName": "AZURE_CLIENT_SECRET"
-          },
-          "login": {
-            "loginParameters": [
-              "resource=https://graph.microsoft.com"
-            ]
           }
         }
       }
+    },
+    "routes": [
+        {
+            "route": "/*",
+            "allowedRoles": [
+                "authenticated"
+            ]
+        }
+    ],
+    "responseOverrides": {
+        "401": {
+            "statusCode": 302,
+            "redirect": "/.auth/login/aad"
+        }
     }
   }
